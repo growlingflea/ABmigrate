@@ -6,13 +6,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>MRSB TPA System</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
+    <link href="{{asset('css/libs.css')}}" rel="stylesheet">
+    <!-- Custom styles for this template -->
 
-    <!-- Custom CSS -->
-    <link href="/css/blog-home.css" rel="stylesheet">
+
+
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,34 +27,91 @@
 
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Start Bootstrap</a>
+@section('topNavBar')
+    <div id = 'main_container' class="container" style="text-align:center;">
+        <nav id = 'main_title' class="navbar navbar-default" >This is for the title of location<br> This is for the menu of the selection<br><br>
+            <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" >MSRB TPA System</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/">Home</a></li>
+                             <li>
+                                <a class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report</a>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+
+                                        <a href="/carriers" class="list-unstyled dropdown-item"  role="button" aria-haspopup="true" aria-expanded="false">Carriers Report</a><br>
+
+                                       <a href="/agents" class="list-unstyled dropdown-item"  role="button" aria-haspopup="true" aria-expanded="false">Agents</a><br>
+
+                                       <a href="/individuals" class="list-unstyled dropdown-item"  role="button" aria-haspopup="true" aria-expanded="false">Individuals</a><br>
+
+                                        <a href="/policies" class="list-unstyled dropdown-item"  role="button" aria-haspopup="true" aria-expanded="false">Policies</a><br>
+
+                                       <a href="/x12editor" class="list-unstyled dropdown-item"  role="button" aria-haspopup="true" aria-expanded="false">X12 Editing and Logging</a><br>
+
+                                    </div>
+                            </li>
+
+
+
+                        </ul>
+
+                    </div><!--/.nav-collapse -->
+
+                </div><!--/.container-fluid -->
+            </div>
+        </nav>
+     </div> <!-- /container -->
+@show
+
+
+
+<div id = "output" name = "output" class="container">
+    @section('leftNavStart')
+
+        <div id="menu_list" class="container">
+            <div class="row">
+                <div id = "output" class="col-md-12">
+                    <div class="sidebar-nav-fixed fixed-left">
+                        <div class="well">
+                            <ul class="nav ">
+    @show
+
+    @section('leftNavEnd')
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>
+
+
+ </div>
+
+    @show
+
+<div class="container navbar-fixed-bottom">
+    @section('footer')
+        This is my master footer
+        <!-- Bootstrap core JavaScript
+   ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+        <script src="{{asset('js/app.js')}}"></script>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+
+    @show
+</div>
+</body>
+</html>

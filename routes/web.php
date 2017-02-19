@@ -22,9 +22,28 @@ Route::get('/', function () {
 });
 
 
-
+Route::get('/activities', 'ActivitiesController@index');
+Route::get('/activities/{id}', 'ActivitiesController@index');
+Route::get('/addresses', 'AddressesController@index');
+Route::get('/addresses/{id}', 'AddressesController@index');
+Route::get('/agents', 'AgentsController@index');
+Route::get('/agents/{id}', 'AgentsController@index');
+Route::get('/carriers', 'CarriersController@index');
+Route::get('/carriers/{id}', 'CarriersController@index');
 Route::get('/reports', 'ReportsController@index');
 Route::get('/reports/{id}', 'ReportsController@index');
+Route::get('/individuals', 'IndividualsController@index');
+Route::get('/individuals/{id}', 'IndividualsController@index');
+Route::get('/policies', 'PoliciesController@index');
+Route::get('/policies/{id}', 'PoliciesController@index');
+Route::get('/x12editor', 'X12EditorController@index');
+Route::get('/x12editor/{id}', 'X12EditorController@index');
+
+Route::get('upload', function() {
+    return View::make('/upload');
+});
+
+Route::post('apply/upload', 'ApplyController@upload');
 
 
 Route::get('/reports2', function () {

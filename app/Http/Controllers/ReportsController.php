@@ -13,7 +13,7 @@ class ReportsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id = 0)
     {
         $client = new Client();
         $res = $client->request('POST', 'https://app.agencybloc.com/api/v1/carriers/search', [
@@ -37,7 +37,7 @@ class ReportsController extends Controller
 
 
             $json_array = json_decode($response);
-            return view('groupList', compact('response'));
+            return view('groupList', compact('response', 'id'));
         }
 
 
@@ -74,7 +74,7 @@ class ReportsController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**

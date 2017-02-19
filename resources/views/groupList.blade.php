@@ -6,15 +6,22 @@
 
 @section('title', 'Page Title')
 
-@section('topNav')
+@section('topNavBar')
     @parent
 
-    <p>This is appended to the master sidebar.</p>
+    <p>This is appended to the top nav.</p>
+
 @endsection
 
-@section('content')
+@section('leftNavStart')
     @parent
-    <p>This is my body content, added to content contetn.</p>
+    <ul class="nav navbar-nav">
+    @foreach(json_decode($response, true) as $carrier)
+        <div id=" {{ $carrier['carrierID'] }}" name=" {{ $carrier['carrierID'] }}">
+            <a href="/reports/{{ $carrier['carrierID'] }}" class="list-unstyled"  role="button" aria-haspopup="true" aria-expanded="false">{{ $carrier['carrierName'] }} </a>
+        </div>
+    @endforeach
+    </ul>
 @endsection
 
 
@@ -26,7 +33,7 @@
 
 @section('footer')
     @parent
-    <p>This is my footer addition.</p>
+    <p>The id set is {{$id}}</p>
 @endsection
 
 
