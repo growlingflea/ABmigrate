@@ -15,11 +15,12 @@ class PoliciesController extends Controller
     public function index($id = 0)
     {
         $client = new Client();
-        $res = $client->request('POST', 'https://app.agencybloc.com/api/v1/policies/search', [
+        $res = $client->request('POST', 'https://app.agencybloc.com/api/v1/policies/detail', [
             'form_params' => [
                 'key' => $_ENV['ABLOCK_KEY'],
                 'sid' => $_ENV['ABLOCK_SID'],
-                'limit' => 250,
+                'policyID' =>'479?',
+
             ]
         ]);
 

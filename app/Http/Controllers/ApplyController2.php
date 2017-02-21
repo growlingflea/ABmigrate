@@ -16,36 +16,6 @@ use Illuminate\Database\Schema\Blueprint;
 class ApplyController extends Controller
 {
 
-
-    //The limit is the max number of records taken by $csv->offset(0)->limit($limit) per iteration
-    //The $max is the max number of records.
-    //taking one round of 25 records method3(25,$csv,$headers,25)
-    //4 rounds of 25 records equaling 100 records would be method3(25, $csv, $headers, 100)
-    public function csvToTable($limit, $csv, $headers, $max, $table){
-
-        $loffset = 0;
-        $offset = 0;
-
-        $start = microtime(true);
-
-        while($loffset <= $max) {
-
-            $res = $csv->setOffset($offset === 0 ? $offset = 1 : $offset =  $loffset)->setLimit($limit)->fetchAll();
-            $loffset = $offset + $limit;
-            foreach($res as $row){
-                $combinedArray = array_combine($headers, $row);
-                DB::table($table)->insertGetID($combinedArray);
-            }
-
-        }
-        $end = microtime(true);
-        $diff = abs($start - $end);
-        return $diff;
-    }
-
-
-
-
     public function upload() {
         // getting all of the post data
         $file = array('image' => Input::file('image'));
@@ -114,7 +84,6 @@ class ApplyController extends Controller
                         } //end of header foreach loop
 
                         $table->engine = 'MyISAM';
-
                     }
 
 
@@ -135,16 +104,49 @@ class ApplyController extends Controller
                 $_POST['csv'] = $csv = Reader::createFromPath($_POST['csv_filename']);
                 $count = count($csv->fetchAll());
 
-                DB::connection()->disableQueryLog();
 
+                $start = microtime(true);
 
-               // method3($limit, $csv, $headers, $max)
-                $testIter = 0;
-                $diff[$testIter]   = $this -> csvToTable(1000,$csv,$headers, $count, 'MasterReport');
-
-                foreach($diff as $record){
-                    echo $record;
+                $report = array();
+                for($i=1; $i <= 100; $i++) {
+                    $row = $csv->fetchOne($i);
+                    $combinedArray = array_combine($headers, $row);
+                    DB::table('MasterReport')->insertGetID($combinedArray);
+  //                  array_push($report, $combinedArray);
                 }
+
+
+
+                $end = microtime(true);
+
+                $diff_1 = abs($start - $end);
+
+
+
+
+
+                echo $diff_1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 return Redirect::to('upload');
             }
